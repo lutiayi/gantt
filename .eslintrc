@@ -1,7 +1,54 @@
 {
-    "extends": ["plugin:prettier/recommended"],
-    "parserOptions": {
-        "ecmaVersion": 6,
-        "sourceType": "module"
-    }
-}
+    "root": true,
+    "parser": "babel-eslint",
+    "extends": [
+      "standard",
+      "plugin:node/recommended",
+      "plugin:security/recommended"
+    ],
+    "plugins": [
+      "node",
+      "security"
+    ],
+    "globals": {},
+    "env": {
+      "commonjs": true,
+      "es6": true,
+      "node": true,
+      "mocha": true
+    },
+    "rules": {
+      "security/detect-object-injection": 0,
+      "node/no-unpublished-require": 0,
+      "node/no-extraneous-require": 0,
+      "complexity": [ 1, 10 ],
+      "max-len": [
+        1,
+        {
+          "code": 200,
+          "tabWidth": 2,
+          "ignoreComments": true,
+          "ignoreTrailingComments": true,
+          "ignoreUrls": true,
+          "ignoreStrings": true,
+          "ignoreTemplateLiterals": true
+        }
+      ]
+    },
+    "overrides": [
+      {
+        "files": "test/**",
+        "rules": {
+          "node/no-unpublished-require": [
+            "error",
+            {
+              "allowModules": [
+                "chai",
+                "utils-test"
+              ]
+            }
+          ]
+        }
+      }
+    ]
+  }
